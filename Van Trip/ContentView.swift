@@ -21,7 +21,10 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        Text("\(item.timestamp!, formatter: itemFormatter)")
+                    Text("Gallons: \(item.gallons)")
+                    Text("Miles:\(item.miles)")
+//                    Text("Location: \(item.gpsLocation)")
                     } label: {
                         Text(item.timestamp!, formatter: itemFormatter)
                     }
@@ -46,6 +49,10 @@ struct ContentView: View {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
+            // TODO get GPS location from the device and save it to Item.gpsLocation
+            newItem.gpsLocation = "0.0"
+            newItem.gallons = 8
+            newItem.miles = 128
 
             do {
                 try viewContext.save()
